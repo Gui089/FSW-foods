@@ -13,34 +13,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Restaurant{
-  id String @id @default(uuid())
-  name String
-  imageUrl String
-  deliveryFee Decimal @db.Decimal(10, 2)
+model Restaurant {
+  id                  String     @id @default(uuid())
+  name                String
+  imageUrl            String
+  deliveryFee         Decimal    @db.Decimal(10, 2)
   deliveryTimeMinutes Int
-  categories Category[]
-  products Product[]
+  categories          Category[]
+  products            Product[]
 }
 
-model Category{
-  id String @id @default(uuid())
-  name String
-  imageUrl String
+model Category {
+  id          String       @id @default(uuid())
+  name        String
+  imageUrl    String
   restaurents Restaurant[]
-  products Product[]
+  products    Product[]
 }
 
-model Product{
-  id String @id @default(uuid())
-  name String
-  description String
-  imageUrl String
-  price Decimal @db.Decimal(10, 2)
-  discountPercentage Int @default(0)
-  restaurantId String
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
-  categoryId String
-  category Category @relation(fields: [categoryId], references: [id])
+model Product {
+  id                 String     @id @default(uuid())
+  name               String
+  description        String
+  imageUrl           String
+  price              Decimal    @db.Decimal(10, 2)
+  discountPercentage Int        @default(0)
+  restaurantId       String
+  restaurant         Restaurant @relation(fields: [restaurantId], references: [id])
+  categoryId         String
+  category           Category   @relation(fields: [categoryId], references: [id])
 }
-
